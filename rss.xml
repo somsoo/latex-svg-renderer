@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>실시간 LaTeX &amp; SVG 수식 렌더러</title>
+    <link>https://latex-svg-renderer.enjoy-onepage.com/</link>
+    <description>LaTeX 수식을 실시간 렌더링하고 고해상도 SVG 벡터 및 300 DPI 투명 PNG로 즉시 내보내는 온라인 수식 스튜디오</description>
+    <language>ko-kr</language>
+    <lastBuildDate>Fri, 02 Oct 2026 23:05:00 +0900</lastBuildDate>
+    <item>
+      <title>실시간 LaTeX &amp; SVG 수식 렌더러 서비스 출시</title>
+      <link>https://latex-svg-renderer.enjoy-onepage.com/</link>
+      <description>MathJax 기반 실시간 벡터 수식 렌더링, 300 DPI PNG 내보내기, 수식 기호 툴바가 탑재된 무료 웹앱</description>
+      <pubDate>Fri, 02 Oct 2026 23:05:00 +0900</pubDate>
+      <guid>https://latex-svg-renderer.enjoy-onepage.com/#launch</guid>
+    </item>
+  </channel>
+</rss>

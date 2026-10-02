@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>서비스 소개 | 실시간 LaTeX & SVG 수식 렌더러</title>
+  <meta name="description" content="실시간 LaTeX & SVG 수식 렌더러의 개발 배경, 고해상도 벡터 그래픽 변환 원리, 기능 안내입니다.">
+  <link rel="canonical" href="https://latex-svg-renderer.enjoy-onepage.com/about.html">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .static-page { max-width: 680px; margin: 0 auto; padding: 24px 16px 40px; }
+    .static-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 20px; color: var(--text-main); }
+    .static-section { margin-bottom: 24px; }
+    .static-section h2 { font-size: 1.15rem; font-weight: 700; color: #818cf8; margin-bottom: 8px; }
+    .static-section p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 12px; }
+    .static-section ul { padding-left: 20px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; }
+    .btn-back { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 16px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-main); text-decoration: none; font-size: 0.88rem; margin-top: 20px; font-weight: 700; }
+    .btn-back:hover { border-color: var(--accent-primary); }
+  </style>
+</head>
+<body>
+  <div class="static-page">
+    <h1 class="static-title">📐 실시간 LaTeX & SVG 수식 렌더러 소개</h1>
+    
+    <div class="static-section">
+      <h2>1. 개발 배경과 해결하려는 결핍</h2>
+      <p>이공계 학생, 연구원, 중·고교 수학교사, 그리고 기술 블로거들은 논문, 문제 출제, 노션 및 블로그 작성 시 수많은 수학 공식을 조판해야 합니다.</p>
+      <p>그러나 기존의 온라인 수식 변환 도구들은 과도한 광고 팝업, 워터마크 강제, 느린 서버 렌더링 지연이 발생하거나, 화면을 단순 캡처해 사용할 경우 인쇄 및 확대 시 글자가 흐릿하게 깨지는(DPI 저하) 심각한 품질 한계를 가지고 있었습니다.</p>
+      <p>본 도구는 <strong>순수 브라우저 클라이언트 연산</strong>을 통해 타이핑 즉시 수식을 파싱하고, 손실 없는 무한 확대 벡터 SVG 및 300 DPI 투명 고화질 PNG로 원클릭 복사·내보내기를 지원합니다.</p>
+    </div>
+
+    <div class="static-section">
+      <h2>2. 핵심 기술 아키텍처</h2>
+      <ul>
+        <li><strong>무손실 SVG 벡터 추출:</strong> 텍스트 글리프를 순수 SVG 패스(&lt;path&gt;)로 변환하여 일러스트레이터, 피그마, 파워포인트에 붙여넣어도 100% 선명한 벡터로 유지됩니다.</li>
+        <li><strong>300 DPI 투명 배경 래스터라이징:</strong> 인쇄용 표준 해상도(3.5배 스케일링)를 적용한 오프스크린 Canvas 연산으로 배경이 투명한 고화질 PNG를 즉시 생성합니다.</li>
+        <li><strong>원클릭 기호 팔레트 &amp; 빈출 공식:</strong> 분수, 근호, 미적분, 그리스 문자, 행렬 등 자주 쓰이는 수식 템플릿과 8대 대표 공식을 클릭 한 번으로 자동 조판합니다.</li>
+        <li><strong>100% 로컬 데이터 보안:</strong> 사용자가 작성한 모든 수식 코드는 외부 서버로 전송되지 않으며 오직 사용자의 브라우저 로컬 스토리지에만 안전하게 보관됩니다.</li>
+      </ul>
+    </div>
+
+    <div class="static-section">
+      <h2>3. 추천 활용 사례</h2>
+      <p>· 수능 및 모의고사 수학·과학탐구 문제 출제 및 학습지 인쇄</p>
+      <p>· 노션(Notion), 티스토리, 벨로그, 깃허브 블로그 등 기술 문서 내 수식 이미지 첨부</p>
+      <p>· 이공계 학위 논문, 발표용 슬라이드(PPT, Keynote) 제작 시 고품질 수식 벡터 삽입</p>
+    </div>
+
+    <a href="index.html" class="btn-back">← 수식 에디터로 돌아가기</a>
+  </div>
+</body>
+</html>

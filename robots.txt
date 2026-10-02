@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://latex-svg-renderer.enjoy-onepage.com/sitemap.xml

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>실시간 LaTeX & SVG 수식 렌더러 | 고해상도 수식 에디터</title>
+  <meta name="description" content="LaTeX 수식을 실시간 렌더링하고 고해상도 SVG 벡터 및 300 DPI 투명 PNG로 즉시 복사·다운로드하는 무료 수식 에디터입니다. 기호 팔레트와 빈출 공식 제공.">
+  <meta name="keywords" content="LaTeX 렌더러, 수식 편집기, LaTeX SVG 변환, 수식 PNG 다운로드, 수학 공식, 노션 수식, 블로그 수식, 레이텍">
+  <meta name="author" content="Enjoy Onepage">
+  <link rel="canonical" href="https://latex-svg-renderer.enjoy-onepage.com/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://latex-svg-renderer.enjoy-onepage.com/">
+  <meta property="og:title" content="실시간 LaTeX & SVG 수식 렌더러 | 고해상도 수식 에디터">
+  <meta property="og:description" content="LaTeX 수식을 실시간 벡터 SVG 및 300 DPI 고화질 PNG로 변환하고 복사하는 웹앱.">
+  <meta property="og:image" content="https://latex-svg-renderer.enjoy-onepage.com/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicon & Manifest -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📐</text></svg>">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0f172a">
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2228289204702106" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- MathJax Configuration -->
+  <script>
+    window.MathJax = {
+      loader: { load: ['input/tex', 'output/svg'] },
+      svg: { fontCache: 'local' }
+    };
+  </script>
+  <script src="js/tex-svg.js"></script>
+</head>
+<body>
+  <!-- 상단 광고 배너 (모바일 90px 엄격 클램핑) -->
+  <div class="ad-box ad-top">
+    <ins class="adsbygoogle" style="display:inline-block;width:100%;height:60px" data-ad-client="ca-pub-2228289204702106" data-ad-slot="3824727725" data-ad-format="horizontal" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <span class="brand-icon" aria-hidden="true">📐</span>
+        <h1 class="brand-title">실시간 LaTeX & SVG 수식 렌더러</h1>
+      </div>
+      <p class="brand-tagline">수식을 타이핑하고 고해상도 SVG 벡터와 300 DPI PNG로 즉시 내보내세요</p>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <!-- 빈출 공식 프리셋 바 -->
+    <nav class="presets-nav" aria-label="빈출 수학 공식 프리셋">
+      <div class="presets-header">
+        <span class="presets-label">⚡ 빠른 공식 불러오기:</span>
+      </div>
+      <div class="presets-scroll-grid" id="presetButtonsGrid">
+        <!-- JS로 동적 생성 -->
+      </div>
+    </nav>
+
+    <!-- 수식 기호 툴바 (원클릭 삽입) -->
+    <section class="card symbols-card" aria-label="수식 기호 팔레트">
+      <div class="symbols-nav-tabs">
+        <button type="button" class="sym-tab-btn active" data-tab="basic">기본/분수</button>
+        <button type="button" class="sym-tab-btn" data-tab="calculus">미적분/극한</button>
+        <button type="button" class="sym-tab-btn" data-tab="greek">그리스문자</button>
+        <button type="button" class="sym-tab-btn" data-tab="matrix">행렬/괄호</button>
+        <button type="button" class="sym-tab-btn" data-tab="operators">연산자/기호</button>
+      </div>
+      <div class="symbols-buttons-tray" id="symbolsTray">
+        <!-- JS로 동적 생성 -->
+      </div>
+    </section>
+
+    <!-- 수식 입력 및 렌더링 스튜디오 카드 -->
+    <section class="card studio-card" aria-label="수식 에디터 및 미리보기">
+      <div class="editor-section">
+        <div class="editor-header">
+          <label for="latexInput" class="editor-label">LaTeX 코드 입력</label>
+          <div class="editor-actions">
+            <button type="button" class="btn-sm-action" id="btnClearInput">지우기</button>
+          </div>
+        </div>
+        <textarea id="latexInput" class="latex-textarea" spellcheck="false" placeholder="LaTeX 수식을 입력하세요... (예: \int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi})">\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}</textarea>
+      </div>
+
+      <!-- 렌더링 뷰어 -->
+      <div class="preview-section">
+        <div class="preview-header">
+          <div class="preview-title-group">
+            <span class="preview-label">실시간 미리보기</span>
+            <span class="status-indicator ready" id="renderStatus">정상 렌더링</span>
+          </div>
+          <div class="preview-scale-group">
+            <button type="button" class="scale-btn" data-scale="1.0">100%</button>
+            <button type="button" class="scale-btn active" data-scale="1.4">140%</button>
+            <button type="button" class="scale-btn" data-scale="1.8">180%</button>
+          </div>
+        </div>
+
+        <div class="preview-stage" id="previewStage">
+          <div class="preview-content" id="previewContent">
+            <!-- MathJax SVG가 여기에 렌더링됨 -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 내보내기 버튼군 (체크리스트: 1줄 버튼, 44px 높이) -->
+      <div class="export-actions-grid">
+        <button type="button" class="action-btn btn-primary" id="btnCopySvg">
+          <span class="btn-icon">📋</span>
+          <span>SVG 코드 복사</span>
+        </button>
+        <button type="button" class="action-btn btn-secondary" id="btnDownloadPng">
+          <span class="btn-icon">🖼️</span>
+          <span>300 DPI PNG 저장</span>
+        </button>
+        <button type="button" class="action-btn btn-secondary" id="btnDownloadSvg">
+          <span class="btn-icon">💾</span>
+          <span>SVG 파일 저장</span>
+        </button>
+        <button type="button" class="action-btn btn-ghost" id="btnCopyLatex">
+          <span class="btn-icon">📑</span>
+          <span>LaTeX 복사</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 중단 광고 배너 -->
+    <div class="ad-box ad-mid">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-2228289204702106"
+           data-ad-slot="1186914926"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- 최근 작성 수식 히스토리 -->
+    <section class="card history-card" aria-label="최근 작성 수식 보관함">
+      <div class="card-header">
+        <h2 class="card-title">최근 작성 수식 보관함</h2>
+        <button type="button" class="btn-sm-action" id="btnClearHistory">기록 삭제</button>
+      </div>
+      <div class="history-list" id="historyList">
+        <p class="empty-hint">작성된 수식이 여기에 자동 저장됩니다.</p>
+      </div>
+    </section>
+
+    <!-- LaTeX 기초 문법 가이드 아티클 -->
+    <article class="card guide-card">
+      <h2 class="card-title">자주 쓰는 LaTeX 수식 문법 요약</h2>
+      <div class="guide-content">
+        <div class="guide-item">
+          <h3 class="guide-heading">1. 분수와 거듭제곱 (Fractions & Powers)</h3>
+          <p class="guide-text">분수는 <code>rac{분자}{분모}</code>로 작성합니다. 거듭제곱은 <code>x^2</code>, 밑첨자는 <code>x_i</code>이며 2글자 이상은 중괄호로 묶습니다(<code>x^{10}</code>, <code>a_{n+1}</code>).</p>
+        </div>
+        <div class="guide-item">
+          <h3 class="guide-heading">2. 근호와 미적분 (Roots & Calculus)</h3>
+          <p class="guide-text">제곱근은 <code>\sqrt{x}</code>, n제곱근은 <code>\sqrt[n]{x}</code>입니다. 정적분은 <code>\int_{a}^{b} f(x) dx</code>, 합계는 <code>\sum_{i=1}^{n}</code>, 극한은 <code>\lim_{x 	o 0}</code>으로 입력합니다.</p>
+        </div>
+        <div class="guide-item">
+          <h3 class="guide-heading">3. 그리스 문자와 기호 (Greek Letters & Symbols)</h3>
+          <p class="guide-text">소문자 <code>lpha, eta, 	heta, \pi, \sigma</code>, 대문자 <code>\Gamma, \Delta, \Theta, \Omega</code>로 입력하며, 곱셈은 <code>	imes</code>, 무한대는 <code>\infty</code>입니다.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- 하단 광고 배너 -->
+    <div class="ad-box ad-bottom">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-2228289204702106"
+           data-ad-slot="3416334507"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </main>
+
+  <!-- 토스트 알림 메시지 -->
+  <div class="toast-message" id="toastMessage" role="status" aria-live="polite"></div>
+
+  <footer class="app-footer">
+    <div class="footer-container">
+      <nav class="footer-nav" aria-label="바닥글 정보">
+        <a href="about.html" class="footer-link">서비스 소개</a>
+        <span class="footer-sep">·</span>
+        <a href="privacy.html" class="footer-link">개인정보처리방침</a>
+        <span class="footer-sep">·</span>
+        <a href="https://enjoy-onepage.com" class="footer-link" target="_blank" rel="noopener">원페이지 허브</a>
+      </nav>
+      <p class="footer-copy">&copy; 2026 Enjoy Onepage. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/symbols.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
